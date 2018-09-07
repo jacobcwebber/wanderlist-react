@@ -21,9 +21,9 @@ class LoginPage extends React.Component {
 
 LoginPage.propTypes = {
   history: PropTypes.shape({
-    push: PropTypes.func.IsRequired
-  }).IsRequired,
-  login: PropTypes.func.IsRequired
+    push: PropTypes.func.isRequired
+  }).isRequired,
+  login: PropTypes.func.isRequired
 };
 
 export default connect(
