@@ -7,11 +7,15 @@ import LoginPage from "./components/pages/LoginPage";
 import SignupPage from "./components/pages/SignupPage";
 import DashboardPage from "./components/pages/DashboardPage";
 import ConfirmationPage from "./components/pages/ConfirmationPage";
+import ForgotPasswordPage from "./components/pages/ForgotPasswordPage";
+import ResetPasswordPage from "./components/pages/ResetPasswordPage";
 import UserRoute from "./components/routes/UserRoute";
 import GuestRoute from "./components/routes/GuestRoute";
+import TopNavigation from "./components/navigation/TopNavigation";
 
-const App = ({ location }) => (
+const App = ({ location, isAuthenticated }) => (
   <div className="ui container">
+    {isAuthenticated && <TopNavigation />}
     <Switch>
       <Route location={location} path="/" exact component={HomePage} />
       <Route
@@ -32,6 +36,18 @@ const App = ({ location }) => (
         exact
         component={SignupPage}
       />
+      <GuestRoute
+        location={location}
+        path="/forgot_password"
+        exact
+        component={ForgotPasswordPage}
+      />
+      <GuestRoute
+        location={location}
+        path="/reset_password/:token"
+        exact
+        component={ResetPasswordPage}
+      />
       <UserRoute
         location={location}
         path="/dashboard"
@@ -45,7 +61,8 @@ const App = ({ location }) => (
 App.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  isAuthenticated: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
